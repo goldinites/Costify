@@ -1,0 +1,9 @@
+@import "variables";
+
+@mixin responsiveFont($desktop_size, $mobile_size) {
+  font-size: calc(#{$mobile_size}px + (#{$desktop_size} - #{$mobile_size}) * (100vw - #{$min-width}px) / (#{$container-width} - #{$min-width}));
+}
+
+@mixin responsiveLineHeight($desktop_size, $mobile_size) {
+  line-height: calc(#{$mobile_size}px + (#{$desktop_size} - #{$mobile_size}) * (100vw - #{$min-width}px) / (#{$container-width} - #{$min-width}));
+}

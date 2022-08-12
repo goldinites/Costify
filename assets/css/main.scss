@@ -1,5 +1,6 @@
-$path_to_Merriweather: '~assets/fonts/Merriweather/';
-$path_to_Manrope: '~assets/fonts/Manrope/';
+@use "sass:math";
+@import "mixin";
+@import "variables";
 
 @font-face {
   font-family: 'Merriweather';
@@ -38,24 +39,44 @@ $path_to_Manrope: '~assets/fonts/Manrope/';
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: 'Manrope', sans-serif;
 }
 
+$h1_font_size : 50;
+$h1_line_height: 60;
+@function calcSize($size, $n) {
+  @if $n != 1 {
+    @return math.ceil(math.div($size, $n) * 1.5);
+  } @else {
+    @return math.ceil($size);
+  }
+}
+@function calcMobileSize($size, $n) {
+  @if $n != 1 {
+    @return math.ceil(math.div(math.div($size, 2), $n) * 1.5);
+  } @else {
+    @return math.ceil(math.div($size, 2));
+  }
+}
 @for $i from 1 through 6 {
+  $font_size: calcSize($size: $h1_font_size, $n: $i);
+  $mobile_font_size: calcMobileSize($size: $h1_font_size, $n: $i);
+  $line_height: calcSize($size: $h1_line_height, $n: $i);
+  $mobile_line_height: calcMobileSize($size: $h1_line_height, $n: $i);
+
   h#{$i} {
     font-family: 'Merriweather', serif;
+    @include responsiveFont(#{$font_size}, #{$mobile_font_size});
+    @include responsiveLineHeight(#{$line_height}, #{$mobile_line_height});
+    letter-spacing: 0.5px;
     font-weight: 700;
-    font-size: calc(40px / #{$i} * 1.5);
-    line-height: calc(55px / #{$i} * 1.5);
     color: #4F4F64;
+    margin: 15px 0;
   }
 }
 
 .container {
-  max-width: 1440px;
+  max-width: #{$container-width}px;
   margin: 0 auto;
   padding: 0 20px;
 }
