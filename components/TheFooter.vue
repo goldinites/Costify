@@ -1,8 +1,9 @@
 <template>
   <footer class="footer">
     <div class="container">
-      footer app
+      <!-- footer app -->
     </div>
+    <div class="overlay"></div>
   </footer>
 </template>
 

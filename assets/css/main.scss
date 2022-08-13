@@ -1,12 +1,12 @@
-@use "sass:math";
-@import "mixin";
-@import "variables";
+@use 'sass:math';
+@import 'mixin';
+@import 'variables';
 
 @font-face {
   font-family: 'Merriweather';
   src: local('Merriweather Bold'), local('Merriweather-Bold'),
-  url('#{$path_to_Merriweather}Merriweather-Bold.woff2') format('woff2'),
-  url('#{$path_to_Merriweather}Merriweather-Bold.woff') format('woff');
+    url('#{$path_to_Merriweather}Merriweather-Bold.woff2') format('woff2'),
+    url('#{$path_to_Merriweather}Merriweather-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
@@ -14,8 +14,8 @@
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope Regular'), local('Manrope-Regular'),
-  url('#{$path_to_Manrope}Manrope-Regular.woff2') format('woff2'),
-  url('#{$path_to_Manrope}Manrope-Regular.woff') format('woff');
+    url('#{$path_to_Manrope}Manrope-Regular.woff2') format('woff2'),
+    url('#{$path_to_Manrope}Manrope-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -23,8 +23,8 @@
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope Light'), local('Manrope-Light'),
-  url('#{$path_to_Manrope}Manrope-Light.woff2') format('woff2'),
-  url('#{$path_to_Manrope}Manrope-Light.woff') format('woff');
+    url('#{$path_to_Manrope}Manrope-Light.woff2') format('woff2'),
+    url('#{$path_to_Manrope}Manrope-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
@@ -32,17 +32,23 @@
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope Medium'), local('Manrope-Medium'),
-  url('#{$path_to_Manrope}Manrope-Medium.woff2') format('woff2'),
-  url('#{$path_to_Manrope}Manrope-Medium.woff') format('woff');
+    url('#{$path_to_Manrope}Manrope-Medium.woff2') format('woff2'),
+    url('#{$path_to_Manrope}Manrope-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
+$font-color: #e1e1e1;
 * {
   font-family: 'Manrope', sans-serif;
 }
 
-$h1_font_size : 50;
+body {
+  background-color: #27282c;
+  color: $font-color;
+}
+
+$h1_font_size: 50;
 $h1_line_height: 60;
 @function calcSize($size, $n) {
   @if $n != 1 {
@@ -59,10 +65,22 @@ $h1_line_height: 60;
   }
 }
 @for $i from 1 through 6 {
-  $font_size: calcSize($size: $h1_font_size, $n: $i);
-  $mobile_font_size: calcMobileSize($size: $h1_font_size, $n: $i);
-  $line_height: calcSize($size: $h1_line_height, $n: $i);
-  $mobile_line_height: calcMobileSize($size: $h1_line_height, $n: $i);
+  $font_size: calcSize(
+    $size: $h1_font_size,
+    $n: $i,
+  );
+  $mobile_font_size: calcMobileSize(
+    $size: $h1_font_size,
+    $n: $i,
+  );
+  $line_height: calcSize(
+    $size: $h1_line_height,
+    $n: $i,
+  );
+  $mobile_line_height: calcMobileSize(
+    $size: $h1_line_height,
+    $n: $i,
+  );
 
   h#{$i} {
     font-family: 'Merriweather', serif;
@@ -70,8 +88,24 @@ $h1_line_height: 60;
     @include responsiveLineHeight(#{$line_height}, #{$mobile_line_height});
     letter-spacing: 0.5px;
     font-weight: 700;
-    color: #4F4F64;
+    color: #4f4f64;
     margin: 15px 0;
+  }
+}
+
+a {
+  color: $font-color;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.link {
+  color: $font-color;
+  &:hover {
+    background-image: linear-gradient(45deg, #1ceeff, #3e3eeb, #b004ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -79,4 +113,37 @@ $h1_line_height: 60;
   max-width: #{$container-width}px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.logo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0 -25% 0 auto;
+    width: 125%;
+    transition: 0.3s ease-in;
+    background: linear-gradient(45deg, #1ceeff, #3e3eeb, #b004ff);
+  }
+  a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #e1e1e1;
+    padding: 7px 20px;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    & img {
+      max-width: 38px;
+    }
+  }
+  &:hover {
+    &:before {
+      inset: 0 0 0 auto;
+    }
+  }
 }
