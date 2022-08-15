@@ -1,26 +1,26 @@
 <template>
   <div class="main">
     <div class="container">
-      <TheHeader/>
-      <Nuxt/>
-      <TheFooter/>
+      <TheHeader />
+      <section class="content-wrapper">
+        <Nuxt />
+      </section>
+      <TheFooter />
     </div>
   </div>
 </template>
 
 <script>
-import TheHeader from "~/components/TheHeader"
-import TheFooter from "~/components/TheFooter"
+import TheHeader from '~/components/TheHeader'
+import TheFooter from '~/components/TheFooter'
 
 export default {
-  name: "default",
+  name: 'default',
   components: {
     TheHeader,
-    TheFooter
-  }
+    TheFooter,
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

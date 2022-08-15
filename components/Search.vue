@@ -1,75 +1,52 @@
 <template>
   <div class="search">
-    <div class="search-icon">
-      <img src="~/assets/icons/search.svg" alt="search"/>
-    </div>
-    <div class="search-bar" style="display: none">
-      <div class="container">
-        <div class="search-input">
-          <input type="text" placeholder="Поиск"/>
-        </div>
-        <div class="search-result">
-          <div class="category">
-            <div class="category-name">Еда</div>
-          </div>
-          <div class="category">
-            <div class="category-name">Одежда</div>
-          </div>
-          <div class="category">
-            <div class="category-name">Развлечения</div>
-          </div>
-        </div>
-      </div>
+    <div class="search-input">
+      <input type="text" placeholder="Поиск">
+      <button class="search-button">
+        <img src="~/assets/icons/search.svg" alt="search" />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Search"
+  name: 'Search',
 }
 </script>
 
 <style lang="scss" scoped>
 .search {
-  &-icon {
-    & img {
-      max-width: 35px;
-    }
-  }
   &-input {
-    input {
-      background-color: #0008;
-      padding: 15px 30px;
-      border-radius: 15px;
+    display: flex;
+    gap:5px;
+    border: 1px solid #57606a;
+    background: rgba(46,55,74,.82);
+    border-radius: 6px;
+    & input {
+      display: block;
       width: 100%;
-
+      padding: 7px 15px;
+      border-radius: 6px;
+      background: transparent;
       &::placeholder {
-        color: #fff;
+        color: #e1e1e1
+      }
+      &:focus {
+        background: #fff;
+        &::placeholder {
+          color: #000;
+        }
       }
     }
   }
-
-  &-bar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 80px;
-    z-index: 10;
-
-    &-result {
-      background-color: rgba(0, 0, 0, 0.5333333333);
-      padding: 5px;
-      border-radius: 15px;
-      width: 100%;
-      margin-top: 15px;
-    }
-
-    .category {
-      border: 1px solid #fff;
-      padding: 15px 30px;
-      border-radius: 15px;
-      margin-bottom: 30px;
+  &-button {
+    background: transparent;
+    cursor: pointer;
+    & img {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 28px;
     }
   }
 }

@@ -1,7 +1,8 @@
 @import 'variables';
 
 body {
-  background-color: #27282c;
+  // background-color: #27282c;
+  background-color: #1e212a;
   color: $font-color;
 }
 
@@ -13,6 +14,14 @@ a {
   }
 }
 
+.main {
+  margin-top: 15px;
+}
+
+.content-wrapper {
+  margin: 70px 0;
+}
+
 .container {
   max-width: #{$container-width}px;
   margin: 0 auto;
@@ -22,7 +31,7 @@ a {
 .logo {
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 8px;
 
   &:before {
     content: '';
@@ -37,8 +46,7 @@ a {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 2px 12px;
-    gap: 8px;
+    padding: 0 12px;
 
     & img {
       min-width: 100px;
@@ -55,7 +63,7 @@ a {
 .glass-item {
   background-color: #fff1;
   box-shadow: 0 0 0 1px #fff3;
-  transition: .3s ease;
+  transition: 0.3s ease;
   &:hover {
     background-color: #fff3;
     box-shadow: 0 0 0 1px #fff3;

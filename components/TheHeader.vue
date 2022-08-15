@@ -34,9 +34,6 @@ export default {
 
 <style lang="scss">
 .header {
-  margin-top: 15px;
-  border-bottom: #e1e1e1;
-  margin-bottom: 85px;
   &__row {
     display: grid;
     gap: 100px;
