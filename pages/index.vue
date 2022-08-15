@@ -1,44 +1,21 @@
 <template>
   <div class="wrapper">
     <div class="container">
-      <div class="categories-list">
-        <div class="category-item">
-          <div class="category-name">
-            Еда
-          </div>
-          <div class="category-content">
-
-          </div>
-        </div>
-        <div class="category-item">
-          <div class="category-name">
-            Одежда
-          </div>
-          <div class="category-content">
-
-          </div>
-        </div>
-        <div class="category-item">
-          <div class="category-name">
-            Развлечения
-          </div>
-          <div class="category-content">
-
-          </div>
-        </div>
-      </div>
+      <Months />
     </div>
   </div>
 </template>
 
 <script>
+import Months from "~/components/Months";
+
 export default {
   name: 'IndexPage',
-
+  components: {
+    Months
+  },
 }
 </script>
 <style lang="scss">
-.categories-list {
-  margin-top: 100px;
-}
+
 </style>

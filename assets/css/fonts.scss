@@ -1,0 +1,41 @@
+@import 'variables';
+
+@font-face {
+  font-family: 'Merriweather';
+  src: local('Merriweather Bold'), local('Merriweather-Bold'),
+  url('#{$path_to_Merriweather}Merriweather-Bold.woff2') format('woff2'),
+  url('#{$path_to_Merriweather}Merriweather-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: local('Manrope Regular'), local('Manrope-Regular'),
+  url('#{$path_to_Manrope}Manrope-Regular.woff2') format('woff2'),
+  url('#{$path_to_Manrope}Manrope-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: local('Manrope Light'), local('Manrope-Light'),
+  url('#{$path_to_Manrope}Manrope-Light.woff2') format('woff2'),
+  url('#{$path_to_Manrope}Manrope-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: local('Manrope Medium'), local('Manrope-Medium'),
+  url('#{$path_to_Manrope}Manrope-Medium.woff2') format('woff2'),
+  url('#{$path_to_Manrope}Manrope-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Manrope', sans-serif;
+}

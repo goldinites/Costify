@@ -17,7 +17,10 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/css/reset',
+    '~/assets/css/fonts',
     '~/assets/css/mixin',
+    '~/assets/css/ui-kit',
+    '~/assets/css/headlines',
     '~/assets/css/main',
   ],
 
@@ -35,7 +38,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/firebase',
- 
+
   ],
 
   // firebase options

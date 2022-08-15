@@ -2,45 +2,17 @@
   <header class="header">
     <div class="container">
       <div class="header__row">
-        <div class="logo">
-          <nuxt-link to="/">
-            <img src="~/assets/icons/logo_coin.svg" alt="logo" />
-            <span>Costify</span>
-          </nuxt-link>
+        <div class="header__left">
+          <div class="logo">
+            <nuxt-link to="/">
+              <img src="~/assets/icons/logo.svg" alt="logo">
+            </nuxt-link>
+          </div>
+          <Menu />
         </div>
-        <div class="search">
-          <div class="search-icon">
-            <img src="~/assets/icons/search.svg" alt="search" />
-          </div>
-          <div class="search-bar" v-if="searchOpen">
-            <div class="container">
-              <div class="search-input">
-                <input type="text" placeholder="Поиск" />
-              </div>
-              <div class="search-result">
-                <div class="category">
-                  <div class="category-name">Еда</div>
-                </div>
-                <div class="category">
-                  <div class="category-name">Одежда</div>
-                </div>
-                <div class="category">
-                  <div class="category-name">Развлечения</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="user"  @mouseover="userPropsShow = true"  @mouseleave="userPropsShow = false">
-          <div class="user-icon">
-            <img src="~/assets/icons/user.svg" alt="user" />
-          </div>
-          <Transition name="fade">
-            <ul class="user-properties" v-if="userPropsShow">
-              <li>Настройки</li>
-              <li>Выйти</li>
-            </ul>
-          </Transition>
+        <div class="header__right">
+          <Search />
+          <User />
         </div>
       </div>
     </div>
@@ -48,14 +20,17 @@
 </template>
 
 <script>
+import Menu from '~/components/Menu'
+import Search from '~/components/Search'
+import User from '~/components/User'
+
 export default {
   name: 'TheHeader',
-  data() {
-    return {
-      userPropsShow: false,
-      searchBarShow: false,
-    }
-  },
+  components: {
+    Menu,
+    Search,
+    User
+  }
 }
 </script>
 
@@ -63,74 +38,22 @@ export default {
 .header {
   margin-top: 15px;
   border-bottom: #e1e1e1;
+
   &__row {
+    display: grid;
+    gap: 100px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &__left {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
   }
-}
-.user {
-  position: relative;
-  &-icon {
-    cursor: pointer;
-  }
-  &-properties {
-    position: absolute;
-    top: 100%;
-    left: -75%;
-    right: -75%;
+  &__right {
     display: flex;
-    flex-direction: column;
-    padding: 15px;
-    border-radius: 15px;
-    gap: 10px;
-    background: #fff;
-    color: #111;
-    box-shadow: 1px 1px 3px 1px #c5c5c5, -1px -1px 3px 1px #c5c5c5;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 40px;
   }
-}
-
-.search {
-  &-input {
-    input {
-      background-color: #0008;
-      padding: 15px 30px;
-      border-radius: 15px;
-      width: 100%;
-      &::placeholder {
-        color: #fff;
-      }
-    }
-  }
-  &-bar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 80px;
-    z-index: 10;
-
-    &-result {
-      background-color: rgba(0, 0, 0, 0.5333333333);
-      padding: 5px;
-      border-radius: 15px;
-      width: 100%;
-      margin-top: 15px;
-    }
-    .category {
-      border: 1px solid #fff;
-      padding: 15px 30px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-    }
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

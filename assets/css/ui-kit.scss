@@ -1,0 +1,13 @@
+@import 'variables';
+
+.link {
+  color: $font-color;
+  &.dark {
+    color: $font-color-dark;
+  }
+  &:hover {
+    background-image: $default-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
