@@ -1,23 +1,27 @@
 <template>
   <div class="months">
     <div class="months-names">
-      <div class="months-item glass-item" :class="activeMonth === index ? 'active-month' : ''"
-           @click="setMonth(index)" v-for="(month, index) in monthsNames" :key="index">
+      <div class="months-item glass-item"
+           :class="startActiveMonth === index ? 'active-month' : ''"
+           @click="setMonth(index)"
+           v-for="(month, index) in monthsNames" :key="index">
         {{ month }}
       </div>
     </div>
     <div class="month-costs">
-      <MonthCost :monthData="months[activeMonth]"/>
+      <MonthCost :monthData="months[startActiveMonth]"/>
     </div>
   </div>
 </template>
 
 <script>
+import MonthCost from "~/components/MonthCost";
+
 export default {
   name: "Months",
   data() {
     return {
-      activeMonth: new Date().getMonth(),
+      activeMonth: false,
       months: [
         {
           month: 'Январь',
@@ -528,6 +532,9 @@ export default {
       ],
     }
   },
+  components: {
+    MonthCost
+  },
   methods: {
     setMonth(month) {
       this.activeMonth = month;
@@ -539,15 +546,21 @@ export default {
       this.months.forEach((element) => result.push(element.month))
       return result;
     },
+    startActiveMonth(){
+      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : Object.keys(this.months).length - 1;
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "assets/css/variables";
+
 .months {
   display: flex;
   flex-direction: column;
   gap: 35px;
+  margin: 70px 0;
 }
 
 .months-names {
@@ -561,8 +574,7 @@ export default {
   border-radius: 15px;
 
   &.active-month {
-    background-color: #fff3;
-    box-shadow: inset 0 0 1px 0 #fff5, 0 0 0 1px #fff3;
+    background: $default-gradient;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="container">
-      <Months />
+      <Months/>
     </div>
   </div>
 </template>
@@ -16,6 +16,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-
-</style>
