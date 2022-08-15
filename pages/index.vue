@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Months from "~/components/Months";
+import Months from "~/components/Months/Months";
 
 export default {
   name: 'IndexPage',

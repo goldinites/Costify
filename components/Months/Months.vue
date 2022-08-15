@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import MonthCost from "~/components/MonthCost";
+import MonthCost from "~/components/Months/MonthCost";
 
 export default {
   name: "Months",
@@ -28,6 +28,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -37,6 +38,7 @@ export default {
             },
             {
               categoryName: 'Гигиена',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Шампунь',
@@ -50,6 +52,7 @@ export default {
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -63,6 +66,7 @@ export default {
             },
             {
               categoryName: 'Машина',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Бензин',
@@ -81,6 +85,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -94,6 +99,7 @@ export default {
             },
             {
               categoryName: 'Напитки',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Вода',
@@ -107,6 +113,7 @@ export default {
             },
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -116,6 +123,7 @@ export default {
             },
             {
               categoryName: 'Машина',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Бензин',
@@ -134,6 +142,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -147,6 +156,7 @@ export default {
             },
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -156,6 +166,7 @@ export default {
             },
             {
               categoryName: 'Гигиена',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Шампунь',
@@ -169,6 +180,7 @@ export default {
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -187,6 +199,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -200,6 +213,7 @@ export default {
             },
             {
               categoryName: 'Напитки',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Вода',
@@ -213,6 +227,7 @@ export default {
             },
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -222,6 +237,7 @@ export default {
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -240,6 +256,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -253,6 +270,7 @@ export default {
             },
             {
               categoryName: 'Напитки',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Вода',
@@ -266,6 +284,7 @@ export default {
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -279,6 +298,7 @@ export default {
             },
             {
               categoryName: 'Машина',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Бензин',
@@ -297,6 +317,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -310,6 +331,7 @@ export default {
             },
             {
               categoryName: 'Напитки',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Вода',
@@ -323,6 +345,7 @@ export default {
             },
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -332,6 +355,7 @@ export default {
             },
             {
               categoryName: 'Гигиена',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Шампунь',
@@ -345,6 +369,7 @@ export default {
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -358,6 +383,7 @@ export default {
             },
             {
               categoryName: 'Машина',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Бензин',
@@ -376,6 +402,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -389,6 +416,7 @@ export default {
             },
             {
               categoryName: 'Напитки',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Вода',
@@ -402,6 +430,7 @@ export default {
             },
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -411,6 +440,7 @@ export default {
             },
             {
               categoryName: 'Гигиена',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Шампунь',
@@ -420,10 +450,19 @@ export default {
                   name: 'Бритва',
                   price: 350,
                 },
+                {
+                  name: 'Дезодорант',
+                  price: 350,
+                },
+                {
+                  name: 'Гель для душа',
+                  price: 350,
+                },
               ]
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -437,6 +476,7 @@ export default {
             },
             {
               categoryName: 'Машина',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Бензин',
@@ -455,6 +495,7 @@ export default {
           monthCategories: [
             {
               categoryName: 'Еда',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Хлеб',
@@ -468,6 +509,7 @@ export default {
             },
             {
               categoryName: 'Напитки',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Вода',
@@ -481,6 +523,7 @@ export default {
             },
             {
               categoryName: 'Техника',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Телефон',
@@ -490,6 +533,7 @@ export default {
             },
             {
               categoryName: 'Гигиена',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Шампунь',
@@ -503,6 +547,7 @@ export default {
             },
             {
               categoryName: 'Дом',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Коммуналка',
@@ -516,6 +561,7 @@ export default {
             },
             {
               categoryName: 'Машина',
+              showItems: false,
               categoryItems: [
                 {
                   name: 'Бензин',
@@ -533,7 +579,7 @@ export default {
     }
   },
   components: {
-    MonthCost
+    MonthCost,
   },
   methods: {
     setMonth(month) {
@@ -546,8 +592,8 @@ export default {
       this.months.forEach((element) => result.push(element.month))
       return result;
     },
-    startActiveMonth(){
-      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : Object.keys(this.months).length - 1;
+    startActiveMonth() {
+      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.months.length - 1;
     }
   }
 }
@@ -575,6 +621,7 @@ export default {
 
   &.active-month {
     background: $default-gradient;
+    box-shadow: none;
   }
 }
 </style>

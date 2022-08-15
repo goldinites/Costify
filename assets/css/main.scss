@@ -54,10 +54,10 @@ a {
 
 .glass-item {
   background-color: #fff1;
-  box-shadow: inset 0 0 3px 1px #fff5, 0 0 0 1px #fff3;
+  box-shadow: 0 0 0 1px #fff3;
   transition: .3s ease;
   &:hover {
     background-color: #fff3;
-    box-shadow: inset 0 0 1px 0 #fff5, 0 0 0 1px #fff3;
+    box-shadow: 0 0 0 1px #fff3;
   }
 }
