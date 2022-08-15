@@ -1,9 +1,5 @@
 <template>
-  <div class="wrapper">
-    <div class="container">
-      <Months/>
-    </div>
-  </div>
+  <Months/>
 </template>
 
 <script>

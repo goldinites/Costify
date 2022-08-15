@@ -95,6 +95,8 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transform-origin: right;
+  animation: showCategories 0.35s ease-in;
 }
 
 .category-name {
@@ -156,6 +158,17 @@ export default {
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@keyframes showCategories {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
   }
 }
 

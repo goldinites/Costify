@@ -606,7 +606,6 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 35px;
-  margin: 70px 0;
 }
 
 .months-names {

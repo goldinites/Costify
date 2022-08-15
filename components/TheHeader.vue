@@ -1,19 +1,17 @@
 <template>
   <header class="header">
-    <div class="container">
-      <div class="header__row">
-        <div class="header__left">
-          <div class="logo">
-            <nuxt-link to="/">
-              <img src="~/assets/icons/logo.svg" alt="logo">
-            </nuxt-link>
-          </div>
-          <Menu />
+    <div class="header__row">
+      <div class="header__left">
+        <div class="logo">
+          <nuxt-link to="/">
+            <img src="~/assets/icons/logo.svg" alt="logo">
+          </nuxt-link>
         </div>
-        <div class="header__right">
-          <Search />
-          <User />
-        </div>
+        <Menu/>
+      </div>
+      <div class="header__right">
+        <Search/>
+        <User/>
       </div>
     </div>
   </header>
@@ -38,17 +36,19 @@ export default {
 .header {
   margin-top: 15px;
   border-bottom: #e1e1e1;
-
+  margin-bottom: 85px;
   &__row {
     display: grid;
     gap: 100px;
     grid-template-columns: repeat(2, 1fr);
   }
+
   &__left {
     display: flex;
     align-items: center;
     gap: 40px;
   }
+
   &__right {
     display: flex;
     align-items: center;

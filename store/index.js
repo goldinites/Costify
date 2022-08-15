@@ -1,7 +1,8 @@
 export default {
     state() {
       return {
-        load: false
+        load: false,
+
       }
     },
     actions: {},
@@ -9,6 +10,6 @@ export default {
     getters: {
         load(state) {
             return state.load
-        }
+        },
     }
 }

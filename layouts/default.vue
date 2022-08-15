@@ -1,9 +1,11 @@
 <template>
-    <div class="main">
-      <TheHeader />
-      <Nuxt />
-      <TheFooter />
+  <div class="main">
+    <div class="container">
+      <TheHeader/>
+      <Nuxt/>
+      <TheFooter/>
     </div>
+  </div>
 </template>
 
 <script>
@@ -12,7 +14,7 @@ import TheFooter from "~/components/TheFooter"
 
 export default {
   name: "default",
-  components:{
+  components: {
     TheHeader,
     TheFooter
   }
