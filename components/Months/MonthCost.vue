@@ -6,8 +6,8 @@
     <div class="month-cost-categories">
       <div class="month-cost-category" v-for="(category, index) in monthData.monthCategories" :key="index">
         <div class="category-name glass-item"
-              :class="category.showItems ? 'active-category' : ''"
-              @click="showItemsHandler(category.id)">
+             :class="category.showItems ? 'active-category' : ''"
+             @click="showItemsHandler(index)">
           {{ category.categoryName }}
         </div>
         <transition name="fade">
@@ -37,8 +37,8 @@ export default {
   },
   props: ['monthData'],
   methods: {
-    showItemsHandler(id) {
-      this.$emit('show-items', id);
+    showItemsHandler(index) {
+      this.monthData.monthCategories[index].showItems = !this.monthData.monthCategories[index].showItems;
     }
   },
   computed: {
@@ -123,6 +123,7 @@ export default {
   position: relative;
   background: #27282c;
   padding: 15px 20px;
+
   &:after {
     content: "";
     position: absolute;
@@ -132,8 +133,10 @@ export default {
     height: 1px;
     background: linear-gradient(45deg, #1ceeff, #3e3eeb, #b004ff, #27282c);
   }
+
   &:last-child {
     border-radius: 0 0 15px 15px;
+
     &:after {
       content: none;
     }

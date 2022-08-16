@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="month-costs">
-      <MonthCost @show-items="showCategoryItems($event)" :monthData="currentMonth"/>
+      <MonthCost :monthData="currentMonth"/>
     </div>
   </div>
 </template>
@@ -31,11 +31,6 @@ export default {
     setMonth(month) {
       this.activeMonth = month;
     },
-    showCategoryItems(id) {
-      let toggleCategory = this.currentMonth.monthCategories.filter(category => category.id === id)[0];
-      console.log(toggleCategory);
-      toggleCategory.showItems = !toggleCategory.showItems;
-    }
   },
   computed: {
     currentMonth() {

@@ -1,7 +1,8 @@
 export default {
   state() {
     return {
-      rawData: [
+      rawData: [],
+      rawDataS: [
         {
           categoryName: 'Техника',
           categoryColor: '#1ceeff',
@@ -100,13 +101,21 @@ export default {
     }
   },
   actions: {
-    createCost(ctx, data) {
-      if(data) {
-
-      }
+    fetchData(ctx, data) {
+      const db = this.$fire.database;
+      const ref = db.ref('categories/');
+      ref.on('value', (snapshot) => {
+        ctx.commit('updateData', snapshot.val());
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      });
+    },
+  },
+  mutations: {
+    updateData(state, data) {
+      state.rawData = data;
     }
   },
-  mutations: {},
   getters: {
     getMonthCosts(state) {
       let months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
@@ -153,6 +162,6 @@ export default {
       if (newPreparedResult) {
         return newPreparedResult;
       }
-    },
+    }
   }
 }

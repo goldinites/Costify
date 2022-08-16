@@ -49,6 +49,7 @@ export default {
       storageBucket: 'costify-app.appspot.com',
       messagingSenderId: '426906950784',
       appId: '1:426906950784:web:7136d1d72d213950eeda65',
+      databaseURL: "https://costify-app-default-rtdb.europe-west1.firebasedatabase.app"
     },
     services: {
       auth: true,
@@ -64,8 +65,10 @@ export default {
     database: {
       emulatorPort: 9000,
       emulatorHost: 'localhost',
-    }
+    },
   },
+
+
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
