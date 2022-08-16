@@ -7,7 +7,7 @@
       <div class="month-cost-category" v-for="(category, index) in monthData.monthCategories" :key="index">
         <div class="category-name glass-item"
               :class="category.showItems ? 'active-category' : ''"
-              @click="category.showItems = !category.showItems">
+              @click="showItemsHandler(category.id)">
           {{ category.categoryName }}
         </div>
         <transition name="fade">
@@ -37,13 +37,12 @@ export default {
   },
   props: ['monthData'],
   methods: {
+    showItemsHandler(id) {
+      this.$emit('show-items', id);
+    }
   },
   computed: {
     diagramData() {
-      function randomColor() {
-        return '#' + ('00' + Math.floor(Math.random() * 16777216).toString(16)).substr(-6)
-      }
-
       let labels = [];
       let categoriesTotal = [];
       let colors = [];

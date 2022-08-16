@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="month-costs">
-      <MonthCost :monthData="allCosts[startActiveMonth]"/>
+      <MonthCost @show-items="showCategoryItems($event)" :monthData="currentMonth"/>
     </div>
   </div>
 </template>
@@ -30,11 +30,16 @@ export default {
   methods: {
     setMonth(month) {
       this.activeMonth = month;
+    },
+    showCategoryItems(id) {
+      let toggleCategory = this.currentMonth.monthCategories.filter(category => category.id === id)[0];
+      console.log(toggleCategory);
+      toggleCategory.showItems = !toggleCategory.showItems;
     }
   },
   computed: {
-    allCosts() {
-      return this.$store.getters.getMonthCosts
+    currentMonth() {
+      return this.$store.getters.getMonthCosts[this.startActiveMonth]
     },
     monthsNames() {
       let result = [];

@@ -100,8 +100,8 @@ export default {
     }
   },
   actions: {
-    showItems(ctx, id) {
-      if(id) {
+    createCost(ctx, data) {
+      if(data) {
 
       }
     }
@@ -120,6 +120,7 @@ export default {
             monthResult.month = month;
             monthResult.monthCategories = {
               categoryName: category.categoryName,
+              id: category.id,
               categoryColor: category.categoryColor,
               showItems: false,
               categoryItems: categoryItems
