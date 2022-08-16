@@ -34,15 +34,15 @@ export default {
   },
   computed: {
     allCosts() {
-      return this.$store.getters.allCosts
+      return this.$store.getters.getMonthCosts
     },
     monthsNames() {
       let result = [];
-      this.$store.getters.allCosts.forEach((element) => result.push(element.month))
+      this.$store.getters.getMonthCosts.forEach((element) => result.push(element.month))
       return result;
     },
     startActiveMonth() {
-      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.$store.getters.allCosts.length - 1;
+      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.$store.getters.getMonthCosts.length - 1;
     }
   }
 }

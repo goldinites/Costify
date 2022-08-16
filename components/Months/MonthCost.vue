@@ -6,8 +6,8 @@
     <div class="month-cost-categories">
       <div class="month-cost-category" v-for="(category, index) in monthData.monthCategories" :key="index">
         <div class="category-name glass-item"
-             :class="category.showItems ? 'active-category' : ''"
-             @click="category.showItems = !category.showItems">
+              :class="category.showItems ? 'active-category' : ''"
+              @click="category.showItems = !category.showItems">
           {{ category.categoryName }}
         </div>
         <transition name="fade">
@@ -36,6 +36,8 @@ export default {
     Doughnut
   },
   props: ['monthData'],
+  methods: {
+  },
   computed: {
     diagramData() {
       function randomColor() {
@@ -49,7 +51,7 @@ export default {
         labels.push(category.categoryName);
         let categoryTotal = category.categoryItems.length > 1 ? category.categoryItems.reduce((prev, current) => prev.price + current.price) : category.categoryItems[0].price
         categoriesTotal.push(categoryTotal);
-        colors.push(randomColor());
+        colors.push(category.categoryColor);
       });
       let chartData = {
         labels,

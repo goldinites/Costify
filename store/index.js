@@ -1,582 +1,157 @@
 export default {
-    state() {
-      return {
-        load: false,
-        categories: [
-          {
-            categoryName: 'Техника',
-          },
-          {
-            categoryName: 'Еда'
-          },
-          {
-            categoryName: 'Напитки'
+  state() {
+    return {
+      rawData: [
+        {
+          categoryName: 'Техника',
+          categoryColor: '#1ceeff',
+          id: 1,
+          categoryItems: [
+            {
+              id: 2,
+              name: 'Телефон',
+              price: 25000,
+              dateCreate: '05/01/2022'
+            },
+            {
+              id: 3,
+              name: 'Телевизор',
+              price: 35000,
+              dateCreate: '14/02/2022'
+            },
+            {
+              id: 4,
+              name: 'Наушники',
+              price: 15500,
+              dateCreate: '11/03/2022'
+            },
+            {
+              id: 5,
+              name: 'Часы',
+              price: 24900,
+              dateCreate: '15/03/2022'
+            },
+            {
+              id: 5,
+              name: 'Фен',
+              price: 2000,
+              dateCreate: '11/02/2022'
+            },
+          ]
+        },
+        {
+          categoryName: 'Еда',
+          categoryColor: '#3e3eeb',
+          id: 15,
+          categoryItems: [
+            {
+              id: 16,
+              name: 'Печенье',
+              price: 140,
+              dateCreate: '20/02/2022'
+            },
+            {
+              id: 17,
+              name: 'Хлеб',
+              price: 40,
+              dateCreate: '20/03/2022'
+            },
+          ]
+        },
+        {
+          categoryName: 'Напитки',
+          categoryColor: '#b004ff',
+          id: 25,
+          categoryItems: [
+            {
+              id: 26,
+              name: 'Вода',
+              price: 50,
+              dateCreate: '12/02/2022'
+            },
+            {
+              id: 27,
+              name: 'Кола',
+              price: 40,
+              dateCreate: '07/01/2022'
+            },
+            {
+              id: 100,
+              name: "Лимонад",
+              price: 200,
+              dateCreate: '12/03/2022'
+            }
+          ]
+        },
+        {
+          id: 30,
+          categoryName: 'Дом',
+          categoryColor: 'orange',
+          categoryItems: [
+            {
+              id: 33,
+              name: 'Коммуналка',
+              price: 15000,
+              dateCreate: '12/02/2022'
+            }
+          ]
+        }
+      ],
+    }
+  },
+  actions: {
+    showItems(ctx, id) {
+      if(id) {
+
+      }
+    }
+  },
+  mutations: {},
+  getters: {
+    getMonthCosts(state) {
+      let months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      let prepareData = [];
+      let data = state.rawData;
+      data.forEach((category) => {
+        months.forEach((month, monthIndex) => {
+          let monthResult = {};
+          let categoryItems = category.categoryItems.filter(element => Math.abs(element.dateCreate.split('/')[1] - 1) === monthIndex);
+          if (categoryItems.length) {
+            monthResult.month = month;
+            monthResult.monthCategories = {
+              categoryName: category.categoryName,
+              categoryColor: category.categoryColor,
+              showItems: false,
+              categoryItems: categoryItems
+            };
+            prepareData.push(monthResult);
           }
-        ],
-        costs: [
-          {
-            month: 'Январь',
-            monthCategories: [
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Гигиена',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Шампунь',
-                    price: 200,
-                  },
-                  {
-                    name: 'Бритва',
-                    price: 350,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Машина',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Бензин',
-                    price: 4000,
-                  },
-                  {
-                    name: 'Масло',
-                    price: 1500,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Февраль',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Напитки',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Вода',
-                    price: 40,
-                  },
-                  {
-                    name: 'Кола',
-                    price: 150,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Машина',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Бензин',
-                    price: 4000,
-                  },
-                  {
-                    name: 'Масло',
-                    price: 1500,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Март',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Гигиена',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Шампунь',
-                    price: 200,
-                  },
-                  {
-                    name: 'Бритва',
-                    price: 350,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Апрель',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Напитки',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Вода',
-                    price: 40,
-                  },
-                  {
-                    name: 'Кола',
-                    price: 150,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Май',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Напитки',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Вода',
-                    price: 40,
-                  },
-                  {
-                    name: 'Кола',
-                    price: 150,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Машина',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Бензин',
-                    price: 4000,
-                  },
-                  {
-                    name: 'Масло',
-                    price: 1500,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Июнь',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Напитки',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Вода',
-                    price: 40,
-                  },
-                  {
-                    name: 'Кола',
-                    price: 150,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Гигиена',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Шампунь',
-                    price: 200,
-                  },
-                  {
-                    name: 'Бритва',
-                    price: 350,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Машина',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Бензин',
-                    price: 4000,
-                  },
-                  {
-                    name: 'Масло',
-                    price: 1500,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Июль',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Напитки',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Вода',
-                    price: 40,
-                  },
-                  {
-                    name: 'Кола',
-                    price: 150,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Гигиена',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Шампунь',
-                    price: 200,
-                  },
-                  {
-                    name: 'Бритва',
-                    price: 350,
-                  },
-                  {
-                    name: 'Дезодорант',
-                    price: 350,
-                  },
-                  {
-                    name: 'Гель для душа',
-                    price: 350,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Машина',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Бензин',
-                    price: 4000,
-                  },
-                  {
-                    name: 'Масло',
-                    price: 1500,
-                  },
-                ]
-              },
-            ]
-          },
-          {
-            month: 'Август',
-            monthCategories: [
-              {
-                categoryName: 'Еда',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Хлеб',
-                    price: 40,
-                  },
-                  {
-                    name: 'Печенье',
-                    price: 140,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Напитки',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Вода',
-                    price: 40,
-                  },
-                  {
-                    name: 'Кола',
-                    price: 150,
-                  }
-                ]
-              },
-              {
-                categoryName: 'Техника',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Телефон',
-                    price: 25000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Гигиена',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Шампунь',
-                    price: 200,
-                  },
-                  {
-                    name: 'Бритва',
-                    price: 350,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Дом',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Коммуналка',
-                    price: 8000,
-                  },
-                  {
-                    name: 'Обои',
-                    price: 4000,
-                  },
-                ]
-              },
-              {
-                categoryName: 'Машина',
-                showItems: false,
-                categoryItems: [
-                  {
-                    name: 'Бензин',
-                    price: 4000,
-                  },
-                  {
-                    name: 'Масло',
-                    price: 1500,
-                  },
-                ]
-              },
-            ]
-          },
-        ],
+        });
+      });
+      let preparedResult = [];
+      if (prepareData.length) {
+        months.forEach((month) => {
+          let preparedMonthData = prepareData.filter(monthData => monthData.month === month);
+          if (preparedMonthData.length) {
+            preparedResult.push(preparedMonthData);
+          }
+        });
+      }
+      let newPreparedResult = [];
+      if (preparedResult.length) {
+        preparedResult.forEach((data) => {
+          let preparedMonth = {}
+          preparedMonth.monthCategories = [];
+          data.forEach((month) => {
+            preparedMonth.month = month.month;
+            preparedMonth.monthCategories.push(month.monthCategories);
+          });
+          newPreparedResult.push(preparedMonth);
+        });
+      }
+      if (newPreparedResult) {
+        return newPreparedResult;
       }
     },
-    actions: {},
-    mutations: {},
-    getters: {
-        allCategories(state) {
-          return state.categories
-        },
-        allCosts(state) {
-            return state.costs;
-        },
-    }
+  }
 }

@@ -29,6 +29,7 @@ export default {
       padding: 7px 15px;
       border-radius: 6px;
       background: transparent;
+      transition: .1s ease-in-out;
       &::placeholder {
         color: #e1e1e1
       }

@@ -7,7 +7,7 @@
       <NuxtLink class="link" to="create-cost">Добавить расход</NuxtLink>
     </li>
     <li>
-      <NuxtLink class="link" to="create-cost">Цели</NuxtLink>
+      <NuxtLink class="link" to="goals">Цели</NuxtLink>
     </li>
   </nav>
 </template>
