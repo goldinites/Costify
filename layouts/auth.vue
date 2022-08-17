@@ -1,25 +1,24 @@
 <template>
-    <div class="main">
-        layout auth
-      <TheHeader />
-      <Nuxt />
-      <TheFooter />
+  <div class="main">
+    <div class="container">
+      <div class="center-form">
+        <Nuxt/>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import TheHeader from "~/components/TheHeader"
-import TheFooter from "~/components/TheFooter"
-
 export default {
-  name: "default",
-  components:{
-    TheHeader,
-    TheFooter
-  }
+  name: "auth",
 }
 </script>
 
 <style scoped>
-
+.center-form {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
 </style>

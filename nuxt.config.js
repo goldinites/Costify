@@ -52,7 +52,9 @@ export default {
       databaseURL: "https://costify-app-default-rtdb.europe-west1.firebasedatabase.app"
     },
     services: {
-      auth: true,
+      auth: {
+        ssr: true
+      },
       firestore: true,
       functions: true,
       storage: true,

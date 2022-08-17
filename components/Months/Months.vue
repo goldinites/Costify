@@ -1,15 +1,15 @@
 <template>
   <div class="months">
     <div class="months-names">
-      <div class="months-item glass-item"
-           :class="startActiveMonth === index ? 'active-month' : ''"
-           @click="setMonth(index)"
-           v-for="(month, index) in monthsNames" :key="index">
-        {{ month }}
-      </div>
+<!--      <div class="months-item glass-item"-->
+<!--           :class="startActiveMonth === index ? 'active-month' : ''"-->
+<!--           @click="setMonth(index)"-->
+<!--           v-for="(month, index) in monthsNames" :key="index">-->
+<!--        {{ month }}-->
+<!--      </div>-->
     </div>
     <div class="month-costs">
-      <MonthCost :monthData="currentMonth"/>
+<!--      <MonthCost :monthData="currentMonth"/>-->
     </div>
   </div>
 </template>
@@ -32,17 +32,20 @@ export default {
       this.activeMonth = month;
     },
   },
+  mounted() {
+      this.$store.dispatch('fetchData');
+  },
   computed: {
     currentMonth() {
-      return this.$store.getters.getMonthCosts[this.startActiveMonth]
+      return this.$store.getters.getMonthCostsHandler[this.startActiveMonth]
     },
     monthsNames() {
       let result = [];
-      this.$store.getters.getMonthCosts.forEach((element) => result.push(element.month))
+      this.$store.getters.getMonthCostsHandler.forEach((element) => result.push(element.month))
       return result;
     },
     startActiveMonth() {
-      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.$store.getters.getMonthCosts.length - 1;
+      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.$store.getters.getMonthCostsHandler.length - 1;
     }
   }
 }

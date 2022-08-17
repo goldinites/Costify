@@ -11,8 +11,5 @@ export default {
     Months
   },
   methods: {},
-  async mounted() {
-      this.$store.dispatch('fetchData');
-  }
 }
 </script>

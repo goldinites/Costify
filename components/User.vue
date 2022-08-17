@@ -8,11 +8,12 @@
     </div>
     <Transition name="slide-fade">
       <ul class="user-properties" v-if="userPropsShow">
+        <li>{{ userName }}</li>
         <li>
           <nuxt-link class="link dark" to="settings">Настройки</nuxt-link>
         </li>
         <li>
-          <nuxt-link class="link dark" to="#logout">Выйти</nuxt-link>
+          <span class="link dark" @click.prevent="logout">Выйти</span>
         </li>
       </ul>
     </Transition>
@@ -27,6 +28,16 @@ export default {
       userPropsShow: false,
     }
   },
+  methods:{
+    logout() {
+      this.$store.dispatch('auth/logoutUser');
+    }
+  },
+  computed: {
+    userName() {
+      return this.$store.getters["auth/getUserName"];
+    }
+  }
 }
 </script>
 

@@ -11,3 +11,20 @@
     -webkit-text-fill-color: transparent;
   }
 }
+
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 500;
+  &.green {
+    color: $white;
+    background: $green-gradient;
+    padding: 10px 25px;
+    transition: .1s ease;
+    border-radius: 4px;
+    outline: 0 solid #2dab7250;
+    &:active, &:focus {
+      outline: 4px solid #2dab7250;
+    }
+  }
+}

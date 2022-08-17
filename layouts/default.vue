@@ -20,6 +20,16 @@ export default {
     TheHeader,
     TheFooter,
   },
+  beforeMount() {
+    if(!this.checkAuth) {
+      this.$router.push('/login');
+    }
+  },
+  computed: {
+    checkAuth() {
+      return this.$store.getters["auth/userIsLogged"]
+    }
+  }
 }
 </script>
 
