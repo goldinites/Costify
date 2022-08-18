@@ -8,6 +8,9 @@
 <script>
 export default {
   name: 'Categories',
+  mounted() {
+    this.$store.dispatch('categories/fetchCategories');
+  },
   computed: {
     allCategories() {
       return this.$store.getters.allCategories

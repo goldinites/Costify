@@ -1,6 +1,6 @@
 import auth from '~/store/auth';
 import categories from '~/pages/categories';
-import months from "~/store/months";
+// import months from "~/store/months";
 
 export default {
   state() {
@@ -9,5 +9,5 @@ export default {
   mutations: {},
   actions: {},
   getters: {},
-  modules: {auth, months, categories}
+  modules: {auth, categories}
 }

@@ -39,15 +39,17 @@ export default {
     },
     logoutUser({commit}) {
       this.$fire.auth.signOut();
-
       commit('logout')
     },
   },
   mutations: {
     authUser(state, user) {
-      state.user = user;
+      state.user = {
+        email: user.email,
+        id : user.id,
+        userName: user.userName,
+      };
       state.authenticated = true;
-      console.log(state.authenticated);
       this.$router.push('/');
     },
     setError(state, error) {
@@ -72,6 +74,7 @@ export default {
     logout(state) {
       state.user = false;
       state.authenticated = false;
+      this.$router.push('/login');
     }
   },
   getters: {

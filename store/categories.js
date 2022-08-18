@@ -6,23 +6,22 @@ export default {
   },
   actions: {
     async newCategory({commit}, name) {
-      this.$fire.database.ref('users/' + this.$fire.auth.currentUser.uid + '/categories/' + name).set({
+      await this.$fire.database.ref('categories/' + this.$fire.auth.currentUser.uid + '/' + name).set({
         categoryName: name
-      }).then(() => {
-        this.$fire.database.ref('users/' + this.$fire.auth.currentUser.uid + '/categories/' + name).on('value', (category) => {
-          commit('updateCategories', category.val());
-        });
       })
     },
     async fetchCategories({commit}) {
-      this.$fire.database.ref('users/' + this.$fire.auth.currentUser.uid + '/categories').on('value', (categories) => {
+     await this.$fire.database.ref('categories/' + this.$fire.auth.currentUser.uid).on('value', (categories) => {
+       console.log('fetch');
         commit('updateCategories', categories.val());
       });
     }
   },
   mutations: {
-    updateCategories(state, category) {
-      state.categories.unshift(category);
+    updateCategories(state, categories) {
+      state.categories = Object.keys(categories).map(function(cat) {
+        return categories[cat];
+      });
     }
   },
   getters: {
