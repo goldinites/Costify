@@ -1,5 +1,5 @@
-import auth from '~/store/auth';
-import categories from '~/pages/categories';
+import auth from '~/store/auth'
+import categories from '~/pages/categories'
 // import months from "~/store/months";
 
 export default {
@@ -9,5 +9,5 @@ export default {
   mutations: {},
   actions: {},
   getters: {},
-  modules: {auth, categories}
+  modules: { auth, categories },
 }

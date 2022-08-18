@@ -1,20 +1,26 @@
 <template>
   <div class="wrapper">
     <h2>Категории</h2>
-    <CategoriesList />
+    <CategoriesList :categories="categories"/>
   </div>
 </template>
 
 <script>
-import CategoriesList from '~/components/Categories/Categories.vue';
+import CategoriesList from '~/components/Categories/Categories.vue'
 export default {
-  name: "categories",
+  name: 'categories',
+  data() {
+    return {
+      categories: [],
+    }
+  },
   components: {
-    CategoriesList
-  }
+    CategoriesList,
+  },
+  async mounted() {
+    this.categories = await this.$store.dispatch('categories/fetchCategories')
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

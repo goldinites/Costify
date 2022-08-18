@@ -1,20 +1,19 @@
 <template>
-    <div class="categories-list">
-        <div class="category-item glass-item" v-for="(category,index) in allCategories" :key="index">
-            {{category.categoryName }}
-        </div>
+  <div class="categories-list">
+    <div class="category-item glass-item"
+         v-for="category in categories"
+         :key="category.id">
+      {{ category.categoryName }}
     </div>
+    <v-select label="categoryName" :options="categories"></v-select>
+  </div>
 </template>
 <script>
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
 export default {
   name: 'Categories',
-  mounted() {
-    this.$store.dispatch('categories/fetchCategories');
-  },
-  computed: {
-    allCategories() {
-      return this.$store.getters.allCategories
-    },
-  },
+  components: {vSelect},
+  props: ['categories'],
 }
 </script>

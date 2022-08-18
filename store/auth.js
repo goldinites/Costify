@@ -1,88 +1,74 @@
 export default {
   state() {
     return {
-      user: false,
       authenticated: false,
-      error: ''
+      error: '',
     }
   },
   actions: {
-    async userRegister({commit}, {email, password, userName}) {
+    async userRegister({ commit }, { email, password, userName }) {
       try {
-        this.$fire.auth.createUserWithEmailAndPassword(email, password)
-          .then((user) => {
-            this.$fire.database.ref('/users/' + user.user.uid).set({
-              id: user.user.uid,
-              email: user.user.email,
-              userName: userName,
-            });
-            this.$fire.database.ref('users/' + user.user.uid).on('value', (data) => {
-              commit('authUser', data.val());
-            });
-          });
-      } catch (error) {
-        commit('setError', error);
-      }
-    },
-    async authUser({commit}, {email, password}) {
-      try {
-        this.$fire.auth.signInWithEmailAndPassword(email, password)
-          .then((user) => {
-            this.$fire.database.ref('users/' + user.user.uid).on('value', (data) => {
-              commit('authUser', data.val());
-            });
-            commit('setError', '');
+        this.$fire.auth
+          .createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            const uid = this.$fire.auth.currentUser.uid
+            this.$fire.database.ref('/users/' + uid).set({
+              id: uid,
+              email: email,
+              displayName: userName,
+            })
+            commit('authUser')
           })
       } catch (error) {
-        commit('setError', error);
+        commit('setError', error)
       }
     },
-    logoutUser({commit}) {
-      this.$fire.auth.signOut();
+    async authUser({ commit }, { email, password }) {
+      try {
+        this.$fire.auth.signInWithEmailAndPassword(email, password).then(() => {
+          commit('authUser')
+        })
+      } catch (error) {
+        commit('setError', error)
+      }
+    },
+    async logoutUser({ commit }) {
+      await this.$fire.auth.signOut()
       commit('logout')
     },
   },
   mutations: {
-    authUser(state, user) {
-      state.user = {
-        email: user.email,
-        id : user.id,
-        userName: user.userName,
-      };
-      state.authenticated = true;
-      this.$router.push('/');
+    authUser(state) {
+      state.authenticated = true
+      state.error = false
+      this.$router.push('/')
     },
     setError(state, error) {
-      let errorMessage = '';
+      let errorMessage = ''
       switch (error.code) {
         case 'auth/user-not-found':
           errorMessage = 'Пользователь не найден'
-          break;
+          break
         case 'auth/invalid-email':
           errorMessage = 'Некорректный email'
-          break;
+          break
         case 'auth/wrong-password':
           errorMessage = 'Неверный пароль'
-          break;
+          break
         default:
           errorMessage = ''
-          break;
+          break
       }
-
       state.error = errorMessage
     },
     logout(state) {
-      state.user = false;
-      state.authenticated = false;
-      this.$router.push('/login');
-    }
+      state.authenticated = false
+      this.$router.push('/login')
+    },
   },
   getters: {
-    getUserName(state) {
-      return state.user.userName;
-    },
     getError(state) {
-      return state.error;
+      return state.error
     },
-  }
+  },
 }

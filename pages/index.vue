@@ -1,16 +1,14 @@
 <template>
+  <div class="div"></div>
   <!--  <Months/>-->
 </template>
 
 <script>
-import Months from "~/components/Months/Months";
+import Months from '~/components/Months/Months'
 
 export default {
   name: 'IndexPage',
-  components: {Months},
+  components: { Months },
   methods: {},
-  mounted() {
-    this.$store.dispatch('categories/fetchCategories');
-  }
 }
 </script>
