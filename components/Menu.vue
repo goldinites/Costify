@@ -4,7 +4,7 @@
       <NuxtLink class="link" to="categories">Все Категории</NuxtLink>
     </li>
     <li>
-      <NuxtLink class="link" to="create-cost">Добавить расход</NuxtLink>
+      <NuxtLink class="link" to="record">Добавить запись</NuxtLink>
     </li>
     <li>
       <NuxtLink class="link" to="goals">Цели</NuxtLink>

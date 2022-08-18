@@ -1,11 +1,11 @@
 <template>
   <div class="main">
     <div class="container">
-      <TheHeader />
+      <TheHeader/>
       <section class="content-wrapper">
-        <Nuxt />
+        <Nuxt/>
       </section>
-      <TheFooter />
+      <TheFooter/>
     </div>
   </div>
 </template>
@@ -20,17 +20,6 @@ export default {
     TheHeader,
     TheFooter,
   },
-  beforeMount() {
-    if(!this.checkAuth) {
-      this.$router.push('/login');
-    }
-  },
-  computed: {
-    checkAuth() {
-      return this.$store.getters["auth/userIsLogged"]
-    }
-  }
+  middleware: 'authenticated',
 }
 </script>
-
-<style scoped></style>

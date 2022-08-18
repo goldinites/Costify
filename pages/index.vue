@@ -11,5 +11,8 @@ export default {
     Months
   },
   methods: {},
+  mounted() {
+    this.$store.dispatch('categories/fetchCategories');
+  }
 }
 </script>
