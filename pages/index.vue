@@ -1,5 +1,5 @@
 <template>
-  <Months/>
+<!--  <Months/>-->
 </template>
 
 <script>

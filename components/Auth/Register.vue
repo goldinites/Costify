@@ -4,11 +4,11 @@
       <h3>Регистрация</h3>
       <nuxt-link to="auth">Войти</nuxt-link>
     </div>
-
     <div class="form-field">
+      <label for="email">Email</label>
       <div class="form-field-input">
-        <label for="email">Email</label>
-        <input type="email"
+        <input class="input"
+               type="email"
                id="email"
                v-model="email">
         <img class="checked"
@@ -22,11 +22,11 @@
         Продолжить
       </span>
     </div>
-
     <div class="form-field" v-if="checkEmail && step > 1">
+      <label for="password">Пароль</label>
       <div class="form-field-input">
-        <label for="password">Пароль</label>
-        <input id="password"
+        <input class="input"
+               id="password"
                :type="typePassword ? 'password' : 'text'"
                v-model="password">
         <img class="checked"
@@ -36,7 +36,7 @@
         <span class="eye"
               :class="typePassword ? '' : 'unvisible'"
               @click="togglePasswordType">
-      </span>
+              </span>
       </div>
       <span class="next-step link"
             @click="step++"
@@ -44,7 +44,25 @@
         Продолжить
       </span>
     </div>
-    <div class="form-field between" v-if="step > 2 && checkEmail && checkPassword">
+    <div class="form-field" v-if="checkPassword && step > 2">
+      <label for="password">Имя пользователя</label>
+      <div class="form-field-input">
+        <input class="input"
+               id="userName"
+               type="text"
+               v-model="userName">
+        <img class="checked"
+             src="~/assets/icons/checked.svg"
+             alt="checked"
+             v-if="checkUserName">
+      </div>
+      <span class="next-step link"
+            @click="step++"
+            v-if="checkUserName && step <= 3">
+        Продолжить
+      </span>
+    </div>
+    <div class="form-field" v-if="step > 3 && checkEmail && checkPassword && checkUserName">
       <button class="btn green" @click.prevent="userRegister">Зарегистрироваться</button>
     </div>
   </form>
@@ -60,6 +78,7 @@ export default {
       step: 1,
       email: '',
       password: '',
+      userName: '',
       typePassword: true,
     }
   },
@@ -71,13 +90,18 @@ export default {
     password: {
       required,
       minLength: minLength(6)
+    },
+    userName: {
+      required,
+      minLength: minLength(2)
     }
   },
   methods: {
     userRegister() {
       let data = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        userName: this.userName,
       }
       this.$store.dispatch('auth/userRegister', data);
     },
@@ -91,6 +115,9 @@ export default {
     },
     checkPassword() {
       return !this.$v.password.$invalid
+    },
+    checkUserName() {
+      return !this.$v.userName.$invalid
     }
   }
 }
@@ -98,59 +125,22 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-  width: 40%;
-  margin: 0 auto;
-  border: 1px solid #57606a;
-  background: rgba(46, 55, 74, .82);
-  padding: 25px;
-  border-radius: 15px;
+  width: 45%;
+  padding: 25px 35px;
 
   &-field {
-    display: flex;
-    flex-direction: column;
     gap: 15px;
+
+    & label {
+      display: inline-block;
+      margin-left: 20px;
+    }
 
     &-input {
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 15px;
-    }
-
-    &.between {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    input {
-      display: block;
-      width: 100%;
-      padding: 15px 20px;
-      font-size: 16px;
-      border-radius: 6px;
-      background: #fff1;
-      transition: 0.1s ease-in-out;
-      border: 1px solid #57606a;
-      color: #fff;
-      font-weight: 300;
-      letter-spacing: 1px;
-
-      &::placeholder {
-        color: #e1e1e1
-      }
-
-      &:focus {
-        background: #fff;
-        color: #000;
-
-        &::placeholder {
-          color: #000;
-        }
-      }
+      margin: 15px 0;
     }
 
     & .btn {
@@ -162,9 +152,10 @@ export default {
 
 .eye {
   position: absolute;
-  top: 50%;
-  right: 10px;
+  top: calc(50% - 10px);
+  right: -25px;
   display: inline-block;
+  cursor: pointer;
 
   &:before {
     content: "";
@@ -176,10 +167,6 @@ export default {
 
   &.unvisible {
     &:before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
       background: url('../../assets/icons/unvisible.svg') no-repeat center/cover;
     }
   }
@@ -188,11 +175,14 @@ export default {
 .checked {
   position: absolute;
   right: 8px;
-  top: 50%;
+  top: calc(50% - 14px);
   width: 28px;
 }
 
+
 .next-step {
+  display: inline-block;
+  margin-left: 20px;
   cursor: pointer;
 }
 </style>

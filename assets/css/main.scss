@@ -64,8 +64,31 @@ a {
   background-color: #fff1;
   box-shadow: 0 0 0 1px #fff3;
   transition: 0.3s ease;
+
   &:hover {
     background-color: #fff3;
     box-shadow: 0 0 0 1px #fff3;
   }
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  width: 40%;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #282C36;
+  border-radius: 12px;
+  border: 1px solid #5f6873;
+
+  &-field {
+    &.between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+

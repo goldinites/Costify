@@ -33,7 +33,7 @@ export default {
     },
   },
   mounted() {
-      this.$store.dispatch('fetchData');
+      // this.$store.dispatch('fetchData');
   },
   computed: {
     currentMonth() {
