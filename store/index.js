@@ -1,5 +1,5 @@
 import auth from '~/store/auth'
-import categories from '~/pages/categories'
+import categories from '~/store/categories'
 // import months from "~/store/months";
 
 export default {

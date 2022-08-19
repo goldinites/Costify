@@ -1,19 +1,34 @@
 <template>
   <div class="categories-list">
-    <div class="category-item glass-item"
+    <div class="categories-item glass-item"
          v-for="category in categories"
          :key="category.id">
-      {{ category.categoryName }}
+      <nuxt-link :to="category.id">
+        {{ category.categoryName }}
+      </nuxt-link>
     </div>
-    <v-select label="categoryName" :options="categories"></v-select>
   </div>
 </template>
 <script>
-import vSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
 export default {
   name: 'Categories',
-  components: {vSelect},
   props: ['categories'],
 }
 </script>
+<style lang="scss" scoped>
+.categories {
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin: 80px 0;
+  }
+
+  &-item {
+    padding: 30px;
+    width: calc(100% / 5 - 40px);
+    text-align: center;
+    border-radius: 12px;
+  }
+}
+</style>

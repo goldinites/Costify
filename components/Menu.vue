@@ -1,13 +1,13 @@
 <template>
   <nav class="menu">
     <li>
-      <NuxtLink class="link" to="categories">Все Категории</NuxtLink>
+      <NuxtLink class="link" to="/categories/">Все Категории</NuxtLink>
     </li>
     <li>
-      <NuxtLink class="link" to="record">Добавить запись</NuxtLink>
+      <NuxtLink class="link" to="/record/">Добавить запись</NuxtLink>
     </li>
     <li>
-      <NuxtLink class="link" to="goals">Цели</NuxtLink>
+      <NuxtLink class="link" to="/goals/">Цели</NuxtLink>
     </li>
   </nav>
 </template>
