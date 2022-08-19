@@ -1,7 +1,7 @@
 <template>
   <div class="month-cost">
     <div class="month-cost-diagram">
-      <Doughnut :chart-data="diagramData.chartData" :chart-options="diagramData.chartOptions"/>
+<!--      <Doughnut :chart-data="diagramData.chartData" :chart-options="diagramData.chartOptions"/>-->
     </div>
     <div class="month-cost-categories">
       <div class="month-cost-category" v-for="(category, index) in monthData.monthCategories" :key="index">
