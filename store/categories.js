@@ -1,14 +1,12 @@
 export default {
   actions: {
-    async newCategory(ctx, name) {
-      const uid = await this.$fire.auth.currentUser.uid;
-      const category = await this.$fire.database.ref('/categories/' + uid).push({categoryName: name});
-      return { categoryName: name , id: category.key}
+    async newCategory(ctx, newCategory) {
+      const uid = this.$fire.auth.currentUser.uid;
+      await this.$fire.database.ref('/categories/' + uid).push(newCategory);
     },
-    async fetchCategories() {
-      const uid = await this.$fire.auth.currentUser.uid
-      const categories = ( await this.$fire.database.ref('/categories/' + uid).once('value')).val() || {}
-      return Object.keys(categories).map((category) => ({...categories[category], id: category,}))
+    async createCost(ctx, cost) {
+      const uid = this.$fire.auth.currentUser.uid;
+      await this.$fire.database.ref('/categories/' + uid + '/' + cost.categoryId + '/categoryItems/').push(cost);
     },
   },
 }

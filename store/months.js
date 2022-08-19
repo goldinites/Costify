@@ -101,14 +101,8 @@ export default {
     }
   },
   actions: {
-    fetchData(ctx, data) {
-      const db = this.$fire.database;
-      const ref = db.ref('categories/');
-      ref.on('value', (snapshot) => {
-        ctx.commit('updateData', snapshot.val());
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      });
+    async fetchData(ctx) {
+      const categories = await ctx.dispatch('categories/fetchCategories');
     },
   },
   mutations: {

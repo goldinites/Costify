@@ -22,6 +22,7 @@ export default {
     '~/assets/css/ui-kit',
     '~/assets/css/headlines',
     '~/assets/css/main',
+    '~/assets/css/custom'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

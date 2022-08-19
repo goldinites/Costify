@@ -18,7 +18,7 @@ export default {
     CategoriesList,
   },
   async mounted() {
-    this.categories = await this.$store.dispatch('categories/fetchCategories')
+    this.categories = await this.$store.dispatch('fetchCategories')
   },
 }
 </script>
