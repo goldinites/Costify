@@ -12,7 +12,6 @@ export default {
     }
   },
   components: {Months},
-  methods: {},
   async mounted() {
     this.categories = await this.$store.dispatch('fetchCategories');
   }

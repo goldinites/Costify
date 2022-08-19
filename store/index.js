@@ -15,6 +15,7 @@ export default {
       return Object.keys(categories).map((category) => ({
         id: category,
         categoryName: categories[category].categoryName,
+        categoryColor: categories[category].categoryColor,
         categoryItems: categories[category].categoryItems ? Object.keys(categories[category].categoryItems).map((item) => ({
           ...categories[category].categoryItems[item],
           id: item

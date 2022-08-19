@@ -1,15 +1,29 @@
 <template>
   <div class="months">
-    <div class="months-names">
-      <div class="months-item glass-item"
-           :class="startActiveMonth === index ? 'active-month' : ''"
-           @click="setMonth(index)"
-           v-for="(month, index) in monthsNames" :key="index">
-        {{ month }}
+    <div class="months-filter">
+      <div class="years">
+        <div class="year"
+             v-for="(year,index) in getMonthFilter"
+             :key="index"
+             @click="setYear(index)">
+          <div class="year-item glass-item"
+               :class="setActiveYear === index ? 'active-year' : ''">
+            {{ year.year }}
+          </div>
+          <div class="months-names">
+            <div class="month-item glass-item"
+                 v-for="(month,key) in year.months"
+                 :key="key"
+                 @click="setMonth(key)">
+              {{ month }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="month-costs">
-<!--      <MonthCost :monthData="currentMonth"/>-->
+      <!--      <MonthCost :monthData="currentMonth"/>-->
     </div>
   </div>
 </template>
@@ -22,6 +36,7 @@ export default {
   data() {
     return {
       activeMonth: false,
+      activeYear: false,
     }
   },
   props: ['categories'],
@@ -29,67 +44,96 @@ export default {
     MonthCost,
   },
   methods: {
+    setYear(year) {
+      this.activeYear = year;
+    },
     setMonth(month) {
       this.activeMonth = month;
     },
   },
   computed: {
-    currentMonth() {
-      return this.categories[this.startActiveMonth]
-    },
-    monthsNames() {
+    getTimelineCosts() {
+      let data = this.categories;
+      let years = this.getYears;
+      let months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      let raw = [];
       let result = [];
-      this.getMonthCosts.forEach((element) => result.push(element.month))
+
+      data.forEach(category => {
+        category.categoryItems.forEach((item) => {
+          raw.push({
+            categoryName: category.categoryName,
+            categoryColor: category.categoryColor,
+            categoryId: item.categoryId,
+            name: item.name,
+            id: item.id,
+            price: item.price,
+            date: item.date,
+          });
+        });
+      })
+
+      if (raw.length) {
+        years.forEach(year => {
+          let oneYear = {year: year, months: []}
+          let yearItems = raw.filter(item => Math.abs(item.date.split('.')[2]) === Math.abs(year))
+          months.forEach((month, monthIndex) => {
+            let oneMonth = {month: month, categories: []}
+            let categoryItems = yearItems.filter(item => Math.abs(item.date.split('.')[1] - 1) === monthIndex);
+            if (categoryItems.length) {
+              let monthCategories = [];
+              categoryItems.forEach(item => {
+                monthCategories.push({
+                  categoryName: item.categoryName,
+                  categoryId: item.categoryId,
+                  categoryColor: item.categoryColor
+                })
+              });
+              let uniqueCategories = monthCategories.filter((v, i, a) => a.indexOf(v) === i);
+              let category = {};
+              uniqueCategories.forEach(currentCategory => {
+                category.categoryName = currentCategory.categoryName;
+                category.categoryId = currentCategory.categoryId;
+                category.categoryColor = currentCategory.categoryColor;
+                category.categoryItems = categoryItems.filter(item => item.categoryName === currentCategory.categoryName);
+              })
+              oneMonth.categories.push(category);
+              oneYear.months.push(oneMonth);
+            }
+          })
+          result.push(oneYear)
+        })
+        return result;
+      }
+    },
+    getMonthFilter() {
+      let result = [];
+      let data = this.getTimelineCosts;
+      data.forEach(year => {
+        let months = [];
+        Object.values(year.months).forEach(month => {
+          months.push(month.month);
+        });
+        result.push({
+          year: year.year,
+          months: months,
+        })
+      });
       return result;
     },
-    startActiveMonth() {
-      return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.getMonthCosts.length - 1;
-    },
-    getMonthCosts() {
-      let months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-      let prepareData = [];
+    getYears() {
       let data = this.categories;
-      data.forEach((category) => {
-        months.forEach((month, monthIndex) => {
-          let monthResult = {};
-          let categoryItems = category.categoryItems.filter(element => Math.abs(element.date.split('.')[1] - 1) === monthIndex);
-          if (categoryItems.length) {
-            monthResult.month = month;
-            monthResult.monthCategories = {
-              categoryName: category.categoryName,
-              id: category.id,
-              categoryColor: category.categoryColor,
-              showItems: false,
-              categoryItems: categoryItems
-            };
-            prepareData.push(monthResult);
-          }
+      let result = [];
+      data.forEach(category => {
+        category.categoryItems.forEach(item => {
+          let year = item.date.split('.')[2];
+          result.push(year);
         });
       });
-      let preparedResult = [];
-      if (prepareData.length) {
-        months.forEach((month) => {
-          let preparedMonthData = prepareData.filter(monthData => monthData.month === month);
-          if (preparedMonthData.length) {
-            preparedResult.push(preparedMonthData);
-          }
-        });
-      }
-      let newPreparedResult = [];
-      if (preparedResult.length) {
-        preparedResult.forEach((data) => {
-          let preparedMonth = {}
-          preparedMonth.monthCategories = [];
-          data.forEach((month) => {
-            preparedMonth.month = month.month;
-            preparedMonth.monthCategories.push(month.monthCategories);
-          });
-          newPreparedResult.push(preparedMonth);
-        });
-      }
-      if (newPreparedResult) {
-        return newPreparedResult;
-      }
+      return result.filter((v, i, a) => a.indexOf(v) === i).sort((a, b) => a - b);
+    },
+    setActiveYear() {
+      return this.activeYear || this.activeYear === 0 ? this.activeYear : this.getYears.length - 1;
     }
   }
 }
@@ -104,17 +148,17 @@ export default {
   gap: 35px;
 }
 
-.months-names {
+.months-names, .year-names {
   display: flex;
   gap: 10px;
 }
 
-.months-item {
+.months-item, .year-item {
   cursor: pointer;
   padding: 10px 15px;
   border-radius: 15px;
 
-  &.active-month {
+  &.active-month, &.active-year {
     background: $default-gradient;
     box-shadow: none;
   }
