@@ -1,17 +1,15 @@
 <template>
   <div class="month-cost">
     <div class="month-cost-diagram">
-<!--      <Doughnut :chart-data="diagramData.chartData" :chart-options="diagramData.chartOptions"/>-->
+      <Doughnut :chart-data="diagramData.chartData" :chart-options="diagramData.chartOptions"/>
     </div>
     <div class="month-cost-categories">
-      <div class="month-cost-category" v-for="(category, index) in monthData.monthCategories" :key="index">
-        <div class="category-name glass-item"
-             :class="category.showItems ? 'active-category' : ''"
-             @click="showItemsHandler(index)">
+      <div class="month-cost-category" v-for="(category, index) in monthData.categories" :key="index">
+        <div class="category-name glass-item">
           {{ category.categoryName }}
         </div>
         <transition name="fade">
-          <div class="category-items" v-if="category.showItems">
+          <div class="category-items">
             <div class="category-item"
                  v-for="(cost, index) in category.categoryItems"
                  :key="index">
@@ -36,17 +34,12 @@ export default {
     Doughnut
   },
   props: ['monthData'],
-  methods: {
-    showItemsHandler(index) {
-      this.monthData.monthCategories[index].showItems = !this.monthData.monthCategories[index].showItems;
-    }
-  },
   computed: {
     diagramData() {
       let labels = [];
       let categoriesTotal = [];
       let colors = [];
-      this.monthData.monthCategories.forEach((category) => {
+      this.monthData.categories.forEach((category) => {
         labels.push(category.categoryName);
         let categoryTotal = category.categoryItems.length > 1 ? category.categoryItems.reduce((prev, current) => prev.price + current.price) : category.categoryItems[0].price
         categoriesTotal.push(categoryTotal);

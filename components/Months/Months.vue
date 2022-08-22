@@ -4,14 +4,15 @@
       <div class="years">
         <div class="year"
              v-for="(year,index) in getMonthFilter"
-             :key="index"
-             @click="setYear(index)">
+             :key="index">
           <div class="year-item glass-item"
+               @click="setYear(index)"
                :class="setActiveYear === index ? 'active-year' : ''">
             {{ year.year }}
           </div>
-          <div class="months-names">
+          <div class="months-names" v-if="setActiveYear === index">
             <div class="month-item glass-item"
+                 :class="setActiveMonth === key ? 'active-month' : ''"
                  v-for="(month,key) in year.months"
                  :key="key"
                  @click="setMonth(key)">
@@ -22,8 +23,8 @@
       </div>
     </div>
 
-    <div class="month-costs">
-      <!--      <MonthCost :monthData="currentMonth"/>-->
+    <div class="month-costs" v-if="currentMonth">
+      <MonthCost :monthData="currentMonth"/>
     </div>
   </div>
 </template>
@@ -46,12 +47,24 @@ export default {
   methods: {
     setYear(year) {
       this.activeYear = year;
+      this.activeMonth = 0;
     },
     setMonth(month) {
       this.activeMonth = month;
     },
   },
   computed: {
+    getYears() {
+      let data = this.categories;
+      let result = [];
+      data.forEach(category => {
+        category.categoryItems.forEach(item => {
+          let year = item.date.split('.')[2];
+          result.push(year);
+        });
+      });
+      return result.filter((v, i, a) => a.indexOf(v) === i).sort((a, b) => a - b);
+    },
     getTimelineCosts() {
       let data = this.categories;
       let years = this.getYears;
@@ -98,8 +111,8 @@ export default {
                 category.categoryItems = categoryItems.filter(item => item.categoryName === currentCategory.categoryName);
               })
               oneMonth.categories.push(category);
-              oneYear.months.push(oneMonth);
             }
+            oneYear.months.push(oneMonth);
           })
           result.push(oneYear)
         })
@@ -109,31 +122,34 @@ export default {
     getMonthFilter() {
       let result = [];
       let data = this.getTimelineCosts;
-      data.forEach(year => {
-        let months = [];
-        Object.values(year.months).forEach(month => {
-          months.push(month.month);
+      if (data) {
+        data.forEach(year => {
+          let months = [];
+          Object.values(year.months).forEach(month => {
+            months.push(month.month);
+          });
+          result.push({
+            year: year.year,
+            months: months,
+          })
         });
-        result.push({
-          year: year.year,
-          months: months,
-        })
-      });
-      return result;
-    },
-    getYears() {
-      let data = this.categories;
-      let result = [];
-      data.forEach(category => {
-        category.categoryItems.forEach(item => {
-          let year = item.date.split('.')[2];
-          result.push(year);
-        });
-      });
-      return result.filter((v, i, a) => a.indexOf(v) === i).sort((a, b) => a - b);
+        return result;
+      }
     },
     setActiveYear() {
-      return this.activeYear || this.activeYear === 0 ? this.activeYear : this.getYears.length - 1;
+      if (this.getYears) {
+        return this.activeYear || this.activeYear === 0 ? this.activeYear : this.getYears.length - 1;
+      }
+    },
+    setActiveMonth() {
+      if (this.setActiveYear && this.getTimelineCosts) {
+        return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.getTimelineCosts[this.setActiveYear].months.length - 1
+      }
+    },
+    currentMonth() {
+      if (this.getTimelineCosts && this.setActiveYear && this.setActiveMonth) {
+        return this.getTimelineCosts[this.setActiveYear].months[this.setActiveMonth]
+      }
     }
   }
 }
@@ -148,12 +164,24 @@ export default {
   gap: 35px;
 }
 
-.months-names, .year-names {
+.months-names, .years {
   display: flex;
   gap: 10px;
 }
 
-.months-item, .year-item {
+.years {
+  position: relative;
+  padding-bottom: 55px;
+}
+
+.months-names {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+
+.month-item, .year-item {
   cursor: pointer;
   padding: 10px 15px;
   border-radius: 15px;
