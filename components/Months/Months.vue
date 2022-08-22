@@ -1,7 +1,7 @@
 <template>
   <div class="months">
     <div class="months-filter">
-      <div class="years">
+      <div class="years" v-if="getMonthFilter">
         <div class="year"
              v-for="(year,index) in getMonthFilter"
              :key="index">
@@ -103,16 +103,16 @@ export default {
                 })
               });
               let uniqueCategories = monthCategories.filter((v, i, a) => a.indexOf(v) === i);
-              let category = {};
               uniqueCategories.forEach(currentCategory => {
+                let category = {};
                 category.categoryName = currentCategory.categoryName;
                 category.categoryId = currentCategory.categoryId;
                 category.categoryColor = currentCategory.categoryColor;
-                category.categoryItems = categoryItems.filter(item => item.categoryName === currentCategory.categoryName);
+                category.categoryItems = categoryItems.filter(item => item.categoryId === currentCategory.categoryId);
+                oneMonth.categories.push(category);
               })
-              oneMonth.categories.push(category);
+              oneYear.months.push(oneMonth);
             }
-            oneYear.months.push(oneMonth);
           })
           result.push(oneYear)
         })
@@ -142,12 +142,12 @@ export default {
       }
     },
     setActiveMonth() {
-      if (this.setActiveYear && this.getTimelineCosts) {
+      if ((this.setActiveYear || this.setActiveYear === 0) && this.getTimelineCosts) {
         return this.activeMonth || this.activeMonth === 0 ? this.activeMonth : this.getTimelineCosts[this.setActiveYear].months.length - 1
       }
     },
     currentMonth() {
-      if (this.getTimelineCosts && this.setActiveYear && this.setActiveMonth) {
+      if (this.getTimelineCosts && (this.setActiveYear || this.setActiveYear === 0) && (this.setActiveMonth || this.setActiveMonth === 0)) {
         return this.getTimelineCosts[this.setActiveYear].months[this.setActiveMonth]
       }
     }
