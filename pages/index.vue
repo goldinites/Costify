@@ -1,8 +1,9 @@
 <template>
-  <Months :categories="categories"/>
+  <div></div>
+  <!-- <Months :categories="categories"/> -->
 </template>
 <script>
-import Months from '~/components/Months/Months'
+// import Months from '~/components/Months/Months'
 
 export default {
   name: 'IndexPage',
@@ -11,9 +12,9 @@ export default {
       categories: [],
     }
   },
-  components: {Months},
+  // components: {Months},
   async mounted() {
-    this.categories = await this.$store.dispatch('fetchCategories');
+    // this.categories = await this.$store.dispatch('fetchCategories');
   }
 }
 </script>

@@ -40,38 +40,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/firebase',
   ],
-
-  // firebase options
-  firebase: {
-    config: {
-      apiKey: 'AIzaSyCU2dC6vxBQls-RJSYtC_oG8DSj_pSDoFk',
-      authDomain: 'costify-app.firebaseapp.com',
-      projectId: 'costify-app',
-      storageBucket: 'costify-app.appspot.com',
-      messagingSenderId: '426906950784',
-      appId: '1:426906950784:web:7136d1d72d213950eeda65',
-      databaseURL: "https://costify-app-default-rtdb.europe-west1.firebasedatabase.app"
-    },
-    services: {
-      auth: {
-        ssr: true
-      },
-      firestore: true,
-      functions: true,
-      storage: true,
-      database: true,
-      messaging: true,
-      performance: true,
-      analytics: true,
-      remoteConfig: true
-    },
-    database: {
-      emulatorPort: 9000,
-      emulatorHost: 'localhost',
-    },
-  },
 
 
 
@@ -81,10 +50,19 @@ export default {
     baseURL: '/',
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     parser: [require('postcss-scss')],
     extractCSS: true,
     postcss: null,
-  },
+    extend (config, ctx) {
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    }
+  }
 }
