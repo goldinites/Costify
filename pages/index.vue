@@ -14,6 +14,8 @@ export default {
   },
   // components: {Months},
   async mounted() {
+    let users = await fetch('/api/users');
+    console.log(users);
     // this.categories = await this.$store.dispatch('fetchCategories');
   }
 }

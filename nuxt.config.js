@@ -1,4 +1,11 @@
 export default {
+  server: {
+    port: process.env.PORT,
+    host: "localhost",
+  },
+  env: {
+    baseUrl: process.env.BASE_URL,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Costify',
@@ -33,6 +40,8 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  telemetry: false,
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [],
 
@@ -47,22 +56,12 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: process.env.BASE_URL,
   },
 
   build: {
     parser: [require('postcss-scss')],
     extractCSS: true,
     postcss: null,
-    extend (config, ctx) {
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
   }
 }
