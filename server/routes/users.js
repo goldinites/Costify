@@ -1,33 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const user = require('../models/user');
 
-// get the client
-const mysql = require('mysql2');
-
-// create the connection to database
-const connection = mysql.createConnection( {
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'karma&koma',
-  database: 'TESTDB'
+router.get("/", function(req, res){
+  user.findAll({raw: true }).then(data=>{
+    res.status(200).json();
+  }).catch(err=>console.log(err));
 });
 
-//Вывод всех динамических страниц сайта.
-router.get("/", async (req, res) => {
-  try {
-// simple query
-    connection.query(
-      'SELECT * FROM `users`',
-      function(err, results, fields) {
-        res.status(200);
-        res.json(results);
-      }
-    );
-  } catch (err) {
-    // Если возникает проблема, то возвращаем ошибку сервера.
-    res.status(500).json({ message: err.message });
-  }
-});
-
-module.exports = router;
+export default router;

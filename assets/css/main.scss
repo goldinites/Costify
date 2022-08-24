@@ -1,8 +1,14 @@
 @import 'variables';
 
+html {
+  height: 100%;
+}
+
 body {
   // background-color: #27282c;
-  background-color: #1e212a;
+  //background-color: #1e212a;
+  height: 100%;
+  background: linear-gradient(to right bottom, #323941, #061018) no-repeat center/cover;
   color: $font-color;
 }
 

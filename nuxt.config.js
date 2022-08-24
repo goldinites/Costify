@@ -32,6 +32,9 @@ export default {
     '~/assets/css/custom'
   ],
 
+  router: {
+    linkActiveClass: 'active-link'
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/vuelidate'
